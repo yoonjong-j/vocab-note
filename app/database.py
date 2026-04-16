@@ -15,11 +15,8 @@ Base = declarative_base()
 
 # Dependency function to provide a database session to routes
 def get_db():
-    # Create a new session
-    db = SessionLocal()
+    db = SessionLocal() # Create a new session
     try:
-        # Give the session to the requester (ex: a FastAPI route)
-        yield db
+        yield db        # Give the session to the requester (ex: a FastAPI route)
     finally:
-        # Always close the session after the request is finished
-        db.close()
+        db.close()      # Always close the session after the request is finished
