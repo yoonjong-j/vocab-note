@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from datetime import datetime
 from typing import Optional
 
@@ -31,4 +31,4 @@ class Word(WordBase):
     # Record last update time
     updated_at: Optional[datetime] = None
     # Config to allow mapping from SQLAlchemy models
-    model_config = {"from_attributes": True} 
+    model_config = ConfigDict(from_attributes=True)
