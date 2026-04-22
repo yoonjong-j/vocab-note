@@ -13,10 +13,13 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 # Base class for all database models to inherit from
 Base = declarative_base()
 
-# Dependency function to provide a database session to routes
 def get_db():
-    db = SessionLocal() # Create a new session
+    """Dependency function to provide a database session to routes"""
+    # Create a new session
+    db = SessionLocal() 
     try:
-        yield db        # Give the session to the requester (ex: a FastAPI route)
+        # Give the session to the requester (ex: a FastAPI route)
+        yield db        
     finally:
-        db.close()      # Always close the session after the request is finished
+        # Always close the session after the request is finished
+        db.close()      
