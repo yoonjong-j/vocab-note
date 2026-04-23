@@ -28,6 +28,7 @@ def create_word(word: schemas.WordCreate, db: Session = Depends(get_db)):
     # Refresh to retrieve database-generated fields (ex: created_at)
     db.refresh(db_word)
 
+    # Return the created word entry
     return db_word
 
 @router.get(
