@@ -29,3 +29,16 @@ def create_word(word: schemas.WordCreate, db: Session = Depends(get_db)):
     db.refresh(db_word)
 
     return db_word
+
+@router.get(
+    "/",
+    response_model=List[schemas.WordResponse],
+    status_code=status.HTTP_200_OK
+)
+def get_words(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    """Retrieve a list of vocabulary entries with pagination support"""
+    # Database query with pagination
+    words = db.query(models.Word).offset(skip).limit(limit).all()
+
+    # Return the retrieved word list
+    return words
