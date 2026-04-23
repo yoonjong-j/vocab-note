@@ -21,7 +21,7 @@ class WordUpdate(BaseModel):
     word_meaning: Optional[str] = Field(None, max_length=300)
     word_example: Optional[str] = Field(None, max_length=500)
 
-class Word(WordBase):
+class WordResponse(WordBase):
     """Schema for API response (includes DB fields)"""
     # Auto-incrementing primary key
     word_id: int
