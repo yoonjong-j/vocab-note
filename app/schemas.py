@@ -8,12 +8,13 @@ class WordBase(BaseModel):
     word: str = Field(..., max_length=200, description="The vocabulary word")                     
     # Required: Definition of the word
     word_meaning: str = Field(..., max_length=300, description="Meaning of the word")
-    
-
-class WordCreate(WordBase):
-    """Schema for creating a new word (inherits from base)"""
     # Optional: Example sentence of the word                
     word_example: Optional[str] = Field(None, max_length=500, description="Example sentence of the word")
+    
+class WordCreate(WordBase):
+    """Schema for creating a new word (inherits from base)"""
+    # No additional fields needed beyond WordBase
+    pass
 
 class WordUpdate(BaseModel):
     """Schema for updating a word (all fields optional)"""
@@ -29,7 +30,6 @@ class WordResponse(WordBase):
     created_at: datetime
     # Record last update time
     updated_at: Optional[datetime] = None
-    # Optional: Example sentence of the word                
-    word_example: Optional[str] = Field(None, max_length=500, description="Example sentence of the word")
+    
     # Config to allow mapping from SQLAlchemy models
     model_config = ConfigDict(from_attributes=True)
