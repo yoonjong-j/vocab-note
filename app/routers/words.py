@@ -43,3 +43,24 @@ def get_words(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
     # Return the retrieved word list
     return words
+
+@router.get(
+    "/{word_id}",
+    response_model=schemas.WordResponse,
+    status_code=status.HTTP_200_OK
+)
+def get_word(word_id: int, db: Session = Depends(get_db)):
+    """Retrieve a single vocabulary entry by its ID"""
+
+    # Query the database for a word that matches the given word_id
+    word = db.query(models.Word).filter(models.Word.word_id == word_id).first()
+
+    # Check if the word exists; if not, raise a `404 Not Found` error
+    if word is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Word with id {word_id} not found"
+        )
+    
+    # Return the found word object
+    return word
