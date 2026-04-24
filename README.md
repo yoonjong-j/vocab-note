@@ -76,7 +76,7 @@ http://localhost:8000
 | `GET` | `/words/{word_id}` | Get a word by ID | 특정 단어 조회 |
 | `GET` | `/words/random` | Get random word | 랜덤 단어 조회 |
 | `POST` | `/words` | Add a new word | 단어 추가 |
-| `PUT` | `/words/{word_id}` | Update a word | 단어 수정 |
+| `PATCH` | `/words/{word_id}` | Update a word | 단어 수정 |
 | `DELETE` | `/words/{word_id}` | Delete a word | 단어 삭제 |
 
 ## 🚀 Getting Started
