@@ -7,6 +7,7 @@ class Word(Base):
     SQLAlchemy model for the 'words' table
     Stores vocabulary words, their meanings, examples, and timestamps
     """
+    
     __tablename__ = "words"
 
     # word_id: SERIAL, PK, NOT NULL

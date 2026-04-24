@@ -4,6 +4,7 @@ from typing import Optional
 
 class WordBase(BaseModel):
     """Base schema for shared word attributes"""
+    
     # Required: The vocabulary word
     word: str = Field(..., max_length=200, description="The vocabulary word")                     
     # Required: Definition of the word
@@ -13,17 +14,20 @@ class WordBase(BaseModel):
     
 class WordCreate(WordBase):
     """Schema for creating a new word (inherits from base)"""
+    
     # No additional fields needed beyond WordBase
     pass
 
 class WordUpdate(BaseModel):
     """Schema for updating a word (all fields optional)"""
+    
     word: Optional[str] = Field(None, max_length=200)
     word_meaning: Optional[str] = Field(None, max_length=300)
     word_example: Optional[str] = Field(None, max_length=500)
 
 class WordResponse(WordBase):
     """Schema for API response (includes DB fields)"""
+    
     # Auto-incrementing primary key
     word_id: int
     # Record creation time

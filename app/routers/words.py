@@ -18,6 +18,7 @@ router = APIRouter(
 )
 def create_word(word: schemas.WordCreate, db: Session = Depends(get_db)):
     """Create a new vocabulary entry"""
+   
     # Map incoming schema data to the SQLAlchemy model
     db_word = models.Word(**word.model_dump())
 
@@ -38,6 +39,7 @@ def create_word(word: schemas.WordCreate, db: Session = Depends(get_db)):
 )
 def get_words(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     """Retrieve a list of vocabulary entries with pagination support"""
+    
     # Database query with pagination
     words = db.query(models.Word).offset(skip).limit(limit).all()
 
@@ -125,7 +127,7 @@ def update_word(word_id: int, updated_word: schemas.WordUpdate, db: Session = De
 )
 def delete_word(word_id: int, db: Session = Depends(get_db)):
     """Remove a vocabulary entry"""
-    
+
     # Search for the word in the database by its ID
     word = db.query(models.Word).filter(models.Word.word_id == word_id).first()
 

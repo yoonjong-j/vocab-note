@@ -15,6 +15,7 @@ Base = declarative_base()
 
 def get_db():
     """Dependency function to provide a database session to routes"""
+    
     # Create a new session
     db = SessionLocal() 
     try:

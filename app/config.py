@@ -2,6 +2,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     """Settings class to manage environment variables and configurations"""
+    
     # Variable to store the PostgreSQL connection string from .env
     database_url: str        
     # Configuration to tell Pydantic to read from the ".env" file                          
