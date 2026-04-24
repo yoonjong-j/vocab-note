@@ -85,3 +85,36 @@ def get_word(word_id: int, db: Session = Depends(get_db)):
     
     # Return the found word object
     return word
+
+@router.patch(
+    "/{word_id}",
+    response_model=schemas.WordResponse,
+    status_code=status.HTTP_200_OK
+)
+def update_word(word_id: int, updated_word: schemas.WordUpdate, db: Session = Depends(get_db)):
+    """Update an existing vocabulary entry"""
+
+    # Prepare a query to find the word by its ID
+    word_query = db.query(models.Word).filter(models.Word.word_id == word_id)
+    # Execute the query to get the existing word
+    db_word = word_query.first()
+
+    # Raise a `404 Not Found` error if the word does not exist
+    if db_word is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Word with id {word_id} not found"
+        )
+    
+    # Extract only the fields provided in the request
+    update_data = updated_word.model_dump(exclude_unset=True)
+    # Perform the update in the database
+    word_query.update(update_data, synchronize_session=False)
+
+    # Save changes to the database
+    db.commit()
+    # Reload the word object with updated data
+    db.refresh(db_word)
+
+    # Return the updated word entry
+    return db_word
