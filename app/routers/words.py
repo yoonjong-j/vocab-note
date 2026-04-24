@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from sqlalchemy import func
+from sqlalchemy import text
 from typing import List
 from .. import models, schemas
 from ..database import get_db
@@ -43,6 +43,27 @@ def get_words(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
     # Return the retrieved word list
     return words
+
+@router.get(
+    "/random",
+    response_model=schemas.WordResponse,
+    status_code=status.HTTP_200_OK
+)
+def get_random_word(db: Session = Depends(get_db)):
+    """Retrieve a random vocabulary entry from the database"""
+
+    # Randomly shuffle the words and pick the first one
+    word = db.query(models.Word).order_by(text("RANDOM()")).first()
+
+    # If no words exist, raise a `404 Not Found` error
+    if word is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="No words found in the database"
+        )
+    
+    # Return the randomly selected word
+    return word
 
 @router.get(
     "/{word_id}",
