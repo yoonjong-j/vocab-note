@@ -118,3 +118,28 @@ def update_word(word_id: int, updated_word: schemas.WordUpdate, db: Session = De
 
     # Return the updated word entry
     return db_word
+
+@router.delete(
+    "/{word_id}",
+    status_code=status.HTTP_204_NO_CONTENT
+)
+def delete_word(word_id: int, db: Session = Depends(get_db)):
+    """Remove a vocabulary entry"""
+    
+    # Search for the word in the database by its ID
+    word = db.query(models.Word).filter(models.Word.word_id == word_id).first()
+
+    # Raise a `404 Not Found` error if the word does not exist
+    if word is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Word with id {word_id} not found"
+        )
+    
+    # Mark the word object for deletion
+    db.delete(word)
+    # Commit the change to permanently remove the word
+    db.commit()
+
+    # Return None as 204 status code requires no response body
+    return None
