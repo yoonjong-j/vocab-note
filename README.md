@@ -65,7 +65,7 @@ Vacabulary Notebook API는 단어를 저장하고 관리하며 학습할 수 있
 ### Base URL
 
 ```text
-http://localhost:8000
+http://127.0.0.1:8000
 ```
 
 ### Endpoints
@@ -79,13 +79,112 @@ http://localhost:8000
 | `PATCH` | `/words/{word_id}` | Update a word | 단어 수정 |
 | `DELETE` | `/words/{word_id}` | Delete a word | 단어 삭제 |
 
+## 📁 Project Structure
+
+### English
+
+```
+ vocab-note/
+  ├── app/                      # Application source code
+  │   ├── routers/              # API route modules
+  │   │   ├── __init__.py
+  │   │   └── words.py          # API endpoints for vocabulary management
+  │   ├── __init__.py
+  │   ├── config.py             # Global configuration and environment settings
+  │   ├── database.py           # Database connection and session handling
+  │   ├── main.py               # FastAPI application entry point
+  │   ├── models.py             # SQLAlchemy ORM models (Database schema)
+  │   └── schemas.py            # Pydantic models (Data validation & serialization)
+  ├── docs/                     # Documentation and design assets
+  │   └── images/               # Image resources 
+  │       └── erd.png           # Entity Relationship Diagram (ERD)
+  ├── .env                      # Environment variables (DB URL, Secrets, etc.)
+  ├── .gitignore                # Files and directories to be ignored by Git
+  └── README.md                 # Project overview and instructions
+```
+
+### Korean
+
+```
+  vocab-note/                   
+  ├── app/                      # 애플리케이션 소스 코드
+  │   ├── routers/              # API 경로(Route) 모듈 관리
+  │   │   ├── __init__.py
+  │   │   └── words.py          # 단어 관리 관련 API 엔드포인트
+  │   ├── __init__.py
+  │   ├── config.py             # 전역 설정 및 환경 변수 관리
+  │   ├── database.py           # 데이터베이스 연결 및 세션 설정
+  │   ├── main.py               # FastAPI 애플리케이션 진입점
+  │   ├── models.py             # SQLAlchemy ORM 모델 (DB 테이블 정의)
+  │   └── schemas.py            # Pydantic 모델 (데이터 검증 및 직렬화)
+  ├── docs/                     # 문서 및 설계 자산
+  │   └── images/               # 이미지 리소스
+  │       └── erd.png           # 데이터베이스 ERD (설계도)
+  ├── .env                      # 환경 변수 설정 파일 (DB URL 등)
+  ├── .gitignore                # Git 버전 관리 제외 대상 설정
+  └── README.md                 # 프로젝트 개요 및 가이드
+```
+
 ## 🚀 Getting Started
 
-### 1. Clone the repository
+### 1. Prerequisites
+
+- Python 3.10 or higher
+
+### 2. Installation
 
 ```bash
 git clone https://github.com/yoonjong-j/vocab-note.git
+```
 
+```bash
 cd vocab-note
 ```
-## 📁 Project Structure
+
+```
+# .env file
+DATABASE_URL=postgresql://[username]:[password]@[host_name]:[port]/[database_name]
+```
+
+### 3. Install Dependencies
+
+```bash
+pip install fastapi "uvicorn[standard]" sqlalchemy python-dotenv pydantic-settings
+```
+
+### 4. Environment Configuration
+
+```bash
+# PostgreSQL
+pip install psycopg2-binary
+```
+
+### 5. Running the Server
+
+```bash
+uvicorn app.main:app --reload
+```
+
+#### API Server
+
+```
+http://127.0.0.1:8000
+```
+
+#### Interactive Docs (Swagger UI)
+
+```
+http://127.0.0.1:8000/docs
+```
+
+## 📍 Future Roadmap (Backlog)
+
+### 🎨 Frontend Development
+
+- [ ] Build a web-based UI to interact with the API (API 연동 웹 UI 구축)
+- [ ] Implement word search and quiz interfaces (단어 검색 및 퀴즈 인터페이스 구현)
+
+### 🔐 User Authentication
+
+- [ ] Implement Sign-up and Login functionality using JWT (JWT 기반 회원가입/로그인 구현)
+- [ ] Add private vocabulary management for individual users (사용자별 개인 단어장 관리 기능 추가)
