@@ -17,7 +17,7 @@ Vocabulary Notebook API is a RESTful backend service that allows users to store,
 
 ### Korean
 
-Vacabulary Notebook API는 단어를 저장하고 관리하며 학습할 수 있는 RESTful 백엔드 서비스입니다. 단어와 뜻, 예문을 등록하고, 랜덤으로 단어를 불러와 복습할 수 있습니다.
+Vocabulary Notebook API는 단어를 저장하고 관리하며 학습할 수 있는 RESTful 백엔드 서비스입니다. 단어와 뜻, 예문을 등록하고, 랜덤으로 단어를 불러와 복습할 수 있습니다.
 
 ## 🛠 Tech Stack
 
@@ -29,16 +29,17 @@ Vacabulary Notebook API는 단어를 저장하고 관리하며 학습할 수 있
 | ORM | SQLAlchemy |
 | Validation | Pydantic |
 | Server | Uvicorn |
+| AI Assist | Gemini, Gemini CLI |
 
 ## 📋 Requirements
 
-## Functional Requiements
+## Functional Requirements
 
 | ID | Feature | Description | 설명 |
 |----|---------|-------------|------|
 | W-REQ-001 | Create Word | Add a new word with meaning and example | 단어, 뜻, 예문을 입력해서 새 단어 추가 |
-| W-REQ-002 | Read All Words | Reatreive a list of all stored | 저장된 전체 단어 목록 조회 |
-| W-REQ-003 | Read One Word | Retreive a single word by its ID | ID로 특정 단어 조회 |
+| W-REQ-002 | Read All Words | Retrieve a list of all stored | 저장된 전체 단어 목록 조회 |
+| W-REQ-003 | Read One Word | Retrieve a single word by its ID | ID로 특정 단어 조회 |
 | W-REQ-004 | Update Word | Modify an existing word's data | 기존 단어의 정보 수정 |
 | W-REQ-005 | Delete Word | Remove a word by its ID | ID로 특정 단어 삭제 |
 | W-REQ-006 | Random Word | Retrieve a random word for review | 복습용 랜덤 단어 1개 조회 |
